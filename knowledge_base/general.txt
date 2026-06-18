@@ -1,0 +1,57 @@
+MEMBER PORTAL GUIDE
+
+The member portal allows you to:
+- View claims and EOB documents
+- Check deductible and out-of-pocket progress
+- Find in-network providers
+- Request ID cards
+- Update personal information
+- Set up auto-pay for premiums
+
+To register: Go to portal.healthinsurance.com and click "Register".
+You will need your policy number, date of birth, and ZIP code.
+
+ACCOUNT MANAGEMENT
+
+To update your address, phone, or email:
+1. Log into the member portal
+2. Go to Profile Settings
+3. Make changes and save
+4. Changes take effect within 24 hours
+
+To add a dependent (new baby, marriage):
+- Report within 60 days of the qualifying event
+- Provide documentation (birth certificate, marriage license)
+- Coverage is effective from the date of the event
+
+COVERAGE QUESTIONS
+
+Coverage year runs January 1 to December 31.
+Annual deductibles reset each calendar year.
+Preventive care (annual physical, vaccines) is covered at 100%.
+Telehealth visits are covered at the same rate as in-office visits.
+
+TECHNICAL SUPPORT
+
+Common technical issues and solutions:
+- Login problems: Clear browser cache or reset password
+- Portal not loading: Try Chrome or Firefox (latest versions)
+- Mobile app issues: Update to the latest version
+- EOB not displaying: Allow 24-48 hours after claim processing
+
+For technical support, call 1-800-555-TECH or use the live chat on the portal.
+
+OPEN ENROLLMENT
+
+Open enrollment runs November 1 - January 15 each year.
+During open enrollment you can:
+- Change your plan
+- Add or remove dependents
+- Update coverage levels
+- Change your primary care provider
+
+Special enrollment periods (60 days) are available for:
+- Marriage, divorce, or death
+- Birth or adoption of a child
+- Loss of other coverage
+- Moving to a new coverage area

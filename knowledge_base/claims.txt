@@ -1,0 +1,42 @@
+CLAIMS PROCESSING GUIDE
+
+To file a new health insurance claim, you need:
+1. A completed claim form (available on the member portal)
+2. Itemized bill from your healthcare provider
+3. Proof of payment (if already paid)
+4. Your insurance policy number and group ID
+
+Claims are typically processed within 15-30 business days.
+You can check claim status online at the member portal or by calling 1-800-555-CLAIM.
+
+CLAIM DENIALS
+
+Common reasons for claim denial:
+- Service not covered under your plan
+- Missing prior authorization
+- Out-of-network provider
+- Coding errors on the claim
+- Deductible not yet met
+
+If your claim is denied:
+1. Review the denial reason on your Explanation of Benefits (EOB)
+2. Gather supporting documentation
+3. File an appeal within 180 days of the denial date
+4. Appeals are reviewed within 30 days for active treatment, 60 days otherwise
+
+APPEAL PROCESS
+
+Level 1: Internal appeal with the insurance company
+Level 2: External independent review if Level 1 is denied
+
+You have the right to request an expedited appeal if waiting could seriously jeopardize your health.
+
+PRIOR AUTHORIZATION
+
+Prior authorization is required for:
+- MRI and CT scans
+- Surgical procedures
+- Specialty medications
+- Inpatient hospital stays
+
+Prior authorization requests are typically reviewed within 72 hours for urgent cases, 15 days for non-urgent.

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartInbox Agent - React Dashboard</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; color: #1a1a2e; }
+        .header { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; padding: 1.5rem; text-align: center; }
+        .header h1 { font-size: 1.75rem; }
+        .header p { opacity: 0.8; font-size: 0.9rem; margin-top: 0.25rem; }
+        .container { max-width: 900px; margin: 1.5rem auto; padding: 0 1rem; }
+        .card { background: white; border-radius: 8px; padding: 1.25rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 1.5rem; }
+        .card h2 { font-size: 1.1rem; margin-bottom: 0.75rem; }
+        textarea { width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; resize: vertical; }
+        textarea:focus { outline: none; border-color: #0f3460; }
+        button { background: #0f3460; color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.95rem; cursor: pointer; margin-top: 0.5rem; }
+        button:hover { background: #1a5276; }
+        button:disabled { opacity: 0.6; cursor: not-allowed; }
+        .tag { display: inline-block; background: #e8f0fe; color: #0f3460; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin: 0.15rem; }
+        .badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+        .badge.claims { background: #e3f2fd; color: #1565c0; }
+        .badge.billing { background: #fce4ec; color: #c62828; }
+        .badge.general { background: #f3e5f5; color: #6a1b9a; }
+        .rag-badge { background: #e8f5e9; color: #2e7d32; }
+        hr { margin: 0.75rem 0; border: 0; border-top: 1px solid #eee; }
+        pre { white-space: pre-wrap; word-break: break-word; background: #f8f9fb; padding: 0.75rem; border-radius: 6px; font-size: 0.9rem; }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #f0f2f5; padding: 0.6rem 0.8rem; text-align: left; font-size: 0.8rem; color: #555; }
+        td { padding: 0.6rem 0.8rem; border-top: 1px solid #f0f2f5; font-size: 0.85rem; }
+        .toolbar { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; }
+        .error-box { background: #ffebee; color: #c62828; padding: 0.75rem; border-radius: 6px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>SmartInbox Agent</h1>
+        <p>Multi-Agent System + RAG-powered Healthcare Support</p>
+    </div>
+    <div id="root"></div>
+
+    <script>
+        function App() {
+            var React = window.React;
+            var useState = React.useState;
+            var useEffect = React.useEffect;
+
+            var API = "/api/v1";
+            var resultState = useState(null);
+            var result = resultState[0];
+            var setResult = resultState[1];
+            var ticketsState = useState([]);
+            var tickets = ticketsState[0];
+            var setTickets = ticketsState[1];
+            var statsState = useState({});
+            var stats = statsState[0];
+            var setStats = statsState[1];
+            var agentsState = useState([]);
+            var agents = agentsState[0];
+            var setAgents = agentsState[1];
+            var loadingState = useState(false);
+            var loading = loadingState[0];
+            var setLoading = loadingState[1];
+            var taskState = useState("");
+            var task = taskState[0];
+            var setTask = taskState[1];
+            var errorState = useState(null);
+            var error = errorState[0];
+            var setError = errorState[1];
+
+            useEffect(function() {
+                fetch(API + "/tickets").then(function(r) { return r.json(); }).then(function(d) { setTickets(d.tickets || []); }).catch(function(e) { console.log(e); });
+                fetch(API + "/stats").then(function(r) { return r.json(); }).then(function(d) { setStats(d || {}); }).catch(function(e) { console.log(e); });
+                fetch(API + "/workers").then(function(r) { return r.json(); }).then(function(d) { if (d.agents) setAgents(d.agents); }).catch(function(e) { console.log(e); });
+            }, []);
+
+            function submitTask() {
+                if (!task.trim()) return;
+                setLoading(true);
+                setError(null);
+                fetch(API + "/agent/process", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ task: task })
+                }).then(function(r) { return r.json(); }).then(function(data) {
+                    setResult(data);
+                    setTask("");
+                    fetch(API + "/tickets").then(function(r) { return r.json(); }).then(function(d) { setTickets(d.tickets || []); });
+                    fetch(API + "/stats").then(function(r) { return r.json(); }).then(function(d) { setStats(d || {}); });
+                }).catch(function(err) {
+                    setError(err.message);
+                }).finally(function() {
+                    setLoading(false);
+                });
+            }
+
+            function getBadge(cat) {
+                return React.createElement("span", { className: "badge " + (cat || "general") }, cat || "general");
+            }
+
+            var children = [];
+
+            if (agents.length > 0) {
+                var agentTags = agents.map(function(a, i) {
+                    return React.createElement("span", { key: i, className: "tag" }, a.name);
+                });
+                children.push(
+                    React.createElement("div", { className: "card", style: { padding: "0.75rem 1.25rem" }, key: "agents" },
+                        React.createElement("strong", null, "Active Agents: "),
+                        agentTags
+                    )
+                );
+            }
+
+            children.push(
+                React.createElement("div", { className: "card", key: "form" },
+                    React.createElement("h2", null, "Submit a Support Request"),
+                    React.createElement("textarea", {
+                        rows: "3",
+                        value: task,
+                        onChange: function(e) { setTask(e.target.value); },
+                        placeholder: "e.g. My claim was denied - what do I do?"
+                    }),
+                    React.createElement("br", null),
+                    React.createElement("button", {
+                        onClick: submitTask,
+                        disabled: loading || !task.trim()
+                    }, loading ? "Agent is thinking..." : "Submit to Agent")
+                )
+            );
+
+            if (error) {
+                children.push(
+                    React.createElement("div", { className: "card error-box", key: "error" }, error)
+                );
+            }
+
+            if (result && !error) {
+                children.push(
+                    React.createElement("div", { className: "card", key: "response" },
+                        React.createElement("h2", null, "Agent Response"),
+                        React.createElement("p", null,
+                            getBadge(result.category),
+                            React.createElement("span", { className: "tag" }, result.assigned_agent || "support"),
+                            result.rag_used ? React.createElement("span", { className: "badge rag-badge" }, "RAG") : null,
+                            React.createElement("span", { style: { fontSize: "0.75rem", color: "#888", marginLeft: "0.5rem" } },
+                                (result.session_id || "").slice(0, 8) + "..."
+                            )
+                        ),
+                        React.createElement("hr", null),
+                        React.createElement("pre", null, result.final_response || "")
+                    )
+                );
+            }
+
+            children.push(
+                React.createElement("div", { className: "card", key: "tickets" },
+                    React.createElement("h2", null, "Processed Tickets"),
+                    React.createElement("div", { className: "toolbar" },
+                        React.createElement("button", { onClick: function() { window.location.reload(); } }, "Refresh"),
+                        React.createElement("span", { style: { fontSize: "0.85rem", color: "#666" } },
+                            "Total: " + (stats.total_tickets || 0) +
+                            (stats.categories ? " | " + Object.entries(stats.categories).map(function(kv) { return kv[0] + ": " + kv[1]; }).join(" | ") : "")
+                        )
+                    ),
+                    tickets.length === 0 ?
+                        React.createElement("p", { style: { color: "#888" } }, "No tickets yet.") :
+                        React.createElement("table", null,
+                            React.createElement("thead", null,
+                                React.createElement("tr", null,
+                                    React.createElement("th", null, "Agent"),
+                                    React.createElement("th", null, "Task"),
+                                    React.createElement("th", null, "Category"),
+                                    React.createElement("th", null, "RAG")
+                                )
+                            ),
+                            React.createElement("tbody", null,
+                                tickets.map(function(t, i) {
+                                    return React.createElement("tr", { key: i },
+                                        React.createElement("td", null, React.createElement("span", { className: "tag" }, t.assigned_agent || "support")),
+                                        React.createElement("td", null, (t.task || "").slice(0, 50)),
+                                        React.createElement("td", null, getBadge(t.category)),
+                                        React.createElement("td", null, t.rag_used ? "Yes" : "No")
+                                    );
+                                })
+                            )
+                        )
+                )
+            );
+
+            return React.createElement("div", { className: "container" }, children);
+        }
+
+        var root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(React.createElement(App));
+    </script>
+</body>
+</html>

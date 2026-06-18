@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+openai>=1.0.0
+pydantic
+python-dotenv
+psycopg2-binary
+langchain>=0.1.0
+langchain-openai>=0.1.0
+tiktoken

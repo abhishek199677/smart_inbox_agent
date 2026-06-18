@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartInbox Agent Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>SmartInbox Agent</h1>
+        <p>AI-Powered Support Ticket Classification & Response System</p>
+    </header>
+
+    <main>
+        <section id="input-section">
+            <h2>Submit a Support Request</h2>
+            <textarea id="task-input" rows="3" placeholder="Describe your issue or question..."></textarea>
+            <button id="submit-btn" onclick="submitTask()">Process with AI Agent</button>
+        </section>
+
+        <section id="result-section" style="display:none;">
+            <h2>Agent Response</h2>
+            <div id="result-card" class="card">
+                <p><strong>Category:</strong> <span id="result-category"></span></p>
+                <p><strong>Session ID:</strong> <code id="result-session"></code></p>
+                <hr>
+                <p id="result-response"></p>
+                <p class="summary" id="result-summary"></p>
+            </div>
+        </section>
+
+        <section id="tickets-section">
+            <h2>Processed Tickets</h2>
+            <div class="toolbar">
+                <button onclick="loadTickets()">Refresh</button>
+                <select id="category-filter" onchange="loadTickets()">
+                    <option value="">All Categories</option>
+                    <option value="billing">Billing</option>
+                    <option value="technical">Technical</option>
+                    <option value="general">General</option>
+                </select>
+            </div>
+            <div id="stats-bar"></div>
+            <table id="tickets-table">
+                <thead>
+                    <tr>
+                        <th>Session ID</th>
+                        <th>Task</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                    </tr>
+                </thead>
+                <tbody id="tickets-body"></tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

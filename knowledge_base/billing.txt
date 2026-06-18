@@ -1,0 +1,46 @@
+MEDICAL BILLING INFORMATION
+
+Common Billing Codes (CPT):
+- 99213: Office visit, established patient, moderate complexity
+- 99214: Office visit, established patient, high complexity
+- 99396: Periodic preventive medicine, 40-64 years
+- 93000: Electrocardiogram (ECG/EKG)
+- 81001: Urinalysis with microscopic exam
+
+BILLING QUESTIONS
+
+If you have questions about a bill:
+1. Verify the service date matches what you received
+2. Check that your insurance has been applied
+3. Look for the "patient responsibility" amount
+4. Contact the billing department if anything seems incorrect
+
+PAYMENT OPTIONS
+
+We offer several payment options:
+- Pay in full online via the member portal
+- Set up a monthly payment plan (no interest for 12 months)
+- Apply for financial assistance if you meet income guidelines
+
+PAYMENT PLAN TERMS
+
+Standard payment plans:
+- 3 months: No interest, no fees
+- 6 months: 2% interest, no fees
+- 12 months: 4% interest, $5 monthly fee
+
+To set up a payment plan, log into the member portal or call billing at 1-800-555-BILL.
+
+REFUND POLICY
+
+Overpayments are refunded within 14 business days.
+Refunds are processed back to the original payment method when possible.
+For check refunds, allow 21 business days for delivery.
+
+INSURANCE COORDINATION OF BENEFITS
+
+If you have multiple insurance policies:
+- Primary insurance pays first
+- Secondary insurance may cover remaining costs
+- You must provide all insurance information at time of service
+- Medicare is typically primary for patients 65+
